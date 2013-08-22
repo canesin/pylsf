@@ -191,11 +191,6 @@ cdef extern from "lsf.h":
        int   nAdmins
        int   *adminIds
        char  **admins
-       int   analyzerLicFlag
-       int   jsLicFlag
-       char  afterHoursWindow[256]
-       char  preferAuthName[256]
-       char  inUseAuthName[256]
 
     cdef struct hostInfo:
        char  hostName[256]
@@ -2100,11 +2095,6 @@ def ls_clusterinfo(cluster_list=[]):
                      10 - hostTypes list
                      11 - nModels
                      12 - nAdmins
-                     13 - analyzerLicFlag
-                     14 - jsLicFlag
-                     15 - afterHoursWindow
-                     16 - preferAuthName
-                     17 - inUseAuthName
    """
 
    cdef clusterInfo *clusterinfo
@@ -2154,12 +2144,8 @@ def ls_clusterinfo(cluster_list=[]):
                         clusterinfo[counter].nTypes,
                         hostTypes,
                         clusterinfo[counter].nModels,
-                        clusterinfo[counter].nAdmins,
-                        clusterinfo[counter].analyzerLicFlag,
-                        clusterinfo[counter].jsLicFlag,
-                        clusterinfo[counter].afterHoursWindow,
-                        clusterinfo[counter].preferAuthName,
-                        clusterinfo[counter].inUseAuthName] )
+                        clusterinfo[counter].nAdmins
+                        ] )
 
    free(Cluster_list)
 
