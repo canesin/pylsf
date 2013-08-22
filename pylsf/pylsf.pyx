@@ -397,7 +397,6 @@ cdef extern from "lsbatch.h":
       int    numSSUSP
       int    numUSUSP
       int    numRESERVE
-      int    maxPendJobs
 
     cdef struct userShares:
       char *user
@@ -2224,7 +2223,6 @@ def lsb_userinfo(user_list=[]):
                     7 - numSSUSP
                     8 - numUSUSP
                     9 - numRESERVE
-                   10 - maxPendJobs
    """
 
    cdef userInfoEnt *userinfoent
@@ -2249,8 +2247,8 @@ def lsb_userinfo(user_list=[]):
                          userinfoent[i].numRUN,
                          userinfoent[i].numSSUSP,
                          userinfoent[i].numUSUSP,
-                         userinfoent[i].numRESERVE,
-                         userinfoent[i].maxPendJobs ] )
+                         userinfoent[i].numRESERVE
+                         ] )
 
    free(User_list)
 
