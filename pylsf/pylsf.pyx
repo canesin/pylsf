@@ -1,6 +1,6 @@
 """
 
-PyLSF : Pyrex module for interfacing to Platform LSF 6.2
+PyLava : Pyrex module for interfacing to Openlava 2.1
 
 """
 
@@ -87,7 +87,7 @@ cdef long* pyLongSeqToLongArray(seq):
 
     return intArray
 
-cdef extern from "lsf/lsf.h":
+cdef extern from "lsf.h":
 
     enum valueType:
        LS_BOOLEAN
@@ -254,7 +254,7 @@ cdef extern from "lsf/lsf.h":
     cdef extern int cls_rescontrol        "ls_rescontrol" (char*, int, int)
 
 
-cdef extern from "lsf/lsbatch.h":
+cdef extern from "lsbatch.h":
 
     cdef struct submig:
       int  jobId

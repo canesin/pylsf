@@ -22,45 +22,15 @@ if not hasattr(sys, 'version_info') or sys.version_info < (2,3,0,'final'):
 
 # Retrieve the LSF environment variables and work out include dir
 
-lsf_major = 0
-lsf_incdir = ""
+lsf_major = 2.1
+lsf_incdir = "/opt/openlava-2.1/include"
 lsf_libdir = os.getenv("LSF_LIBDIR")
-try:
-    lsf_major = int(os.getenv("LSF_VERSION").split('.')[0])
-except AttributeError:
-    lsf_major = 0
-if (lsf_libdir):
-
-  LSF_VERSION = re.compile(r'^(?P<lsf_dir>.*lsf|.*lsfhpc)/(?P<lsf_major>\d+).(?P<lsf_minor>\d+)/.*lib$')
-  LSF_INCDIR = re.compile(r'^(?P<lsf_dir>.*)/(?P<lsf_os>.*)/lib$')
-
-  line = LSF_INCDIR.match(lsf_libdir)
-  if line:
-
-    lsf_incdir = line.group("lsf_dir") + "/include"
-    if not lsf_major:
-        line = LSF_VERSION.match(lsf_libdir)
-        if line:
-          if line.group("lsf_major"):
-            lsf_major = int(line.group("lsf_major"))
-
-else:
-  raise SystemExit, "PyLSF: Unable to detect LSF environment......exiting"
-
-print lsf_incdir
 include_dirs = [lsf_incdir, '/usr/include']
 library_dirs = [lsf_libdir, '/usr/lib64', '/usr/lib']
 extra_link_args = [ '']
 extra_objects = [ '']
 
-if lsf_major == 7:
-  libraries = ['bat', 'lsf', 'lsbstream', 'nsl', 'dl', 'crypt' ]
-elif lsf_major == 6:
-  libraries = ['bat','lsf','nsl']
-elif lsf_major == 0:
-  raise SystemExit, "PyLSF: cannot detect any LSF version.....exiting"
-else:
-  raise SystemExit, "PyLSF: detected unsupported LSF version %d.....exiting" % lsf_major
+libraries = ['bat','lsf','nsl']
 
 print "PyLSF: detected LSF version %d" % lsf_major
 compiler_dir = os.path.join(get_python_lib(prefix=''), 'pylsf/')
