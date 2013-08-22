@@ -2014,13 +2014,10 @@ def ls_gethostinfo(host_list=[]):
                        7 - maxTmp
                        8 - nDisks
                        9 - resources list
-                      10 - Dresources list
-                      11 - windows
-                      12 - BusyThreshold list
-                      13 - isServer
-                      14 - licensed
-                      15 - rexPriority
-                      16 - licFeaturesNeeded
+                      10 - windows
+                      11 - BusyThreshold list
+                      12 - isServer
+                      13 - rexPriority
    """
 
    cdef hostInfo *hostinfo
@@ -2056,11 +2053,6 @@ def ls_gethostinfo(host_list=[]):
         currDest = hostinfo[counter].resources[i]
         resources.append(currDest)
 
-     Dresources = []
-     for i from 0 <= i < hostinfo[counter].nDRes:
-        currDest = hostinfo[counter].DResources[i]
-        Dresources.append(currDest)
-
      BusyThreshold = []
      for i from 0 <= i < hostinfo[counter].numIndx:
         currDest = <float>hostinfo[counter].busyThreshold[i]
@@ -2076,13 +2068,10 @@ def ls_gethostinfo(host_list=[]):
                         hostinfo[counter].maxTmp,
                         hostinfo[counter].nDisks,
                         resources,
-                        Dresources,
                         hostinfo[counter].windows,
                         BusyThreshold,
                         hostinfo[counter].isServer,
-                        hostinfo[counter].licensed,
-                        hostinfo[counter].rexPriority,
-                        hostinfo[counter].licFeaturesNeeded
+                        hostinfo[counter].rexPriority
                        ] )
 
    free(Host_list)
